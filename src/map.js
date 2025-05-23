@@ -1,0 +1,77 @@
+class GameMap{
+    /**
+     * @type {MapTile[]}
+     */
+    #tiles;
+
+    /**
+     * 
+     * @param {number[][]} nagy_tomb 
+     */
+    constructor(nagy_tomb){
+        this.#tiles = [];
+        const kep1 = new Image();
+        const kep2 = new Image();
+        kep1.src = "assets/wall.png";
+        kep2.src = "assets/bg.png";
+       let kep_ertek = 0;
+        for(let y = 0; y < nagy_tomb.length; y++){
+            for(let x = 0; x < nagy_tomb[y].length; x++){
+                if(nagy_tomb[y][x] == 1){
+                    kep_ertek = kep1;
+                }
+                else{
+                     kep_ertek = kep2;
+                }
+                const maptile = new MapTile(x, y, kep_ertek);
+                console.log(maptile);
+                 this.#tiles.push(maptile);
+            };
+        };
+
+        
+       
+    };
+
+    /**
+     * 
+     * @param {CanvasRenderingContext2D} ctx1 
+     */
+    render(ctx1){
+        for(const tile of this.#tiles){
+            tile.render(ctx1);
+        };
+    };
+
+};
+
+class MapTile{
+    /**
+     * @type {RectAngle}
+     */
+    #rectangle;
+
+    /**
+     * @type {Image}
+     */
+    #image;
+
+    /**
+     * 
+     * @param {number} x 
+     * @param {number} y 
+     * @param {Image} image 
+     */
+    constructor(x, y, image){
+        this.#image = image;
+        this.#rectangle = new RectAngle(x * VIEW_TILE_WIDTH, y * VIEW_TILE_HEIGHT, VIEW_TILE_WIDTH, VIEW_TILE_HEIGHT);
+    };
+
+    /**
+     * 
+     * @param {CanvasRenderingContext2D} ctx 
+     */
+    render(ctx){
+        ctx.drawImage(this.#image, this.#rectangle.x, this.#rectangle.y, this.#rectangle.width, this.#rectangle.height);
+    };
+};
