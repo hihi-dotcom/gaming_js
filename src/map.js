@@ -24,7 +24,6 @@ class GameMap{
                      kep_ertek = kep2;
                 }
                 const maptile = new MapTile(x, y, kep_ertek);
-                console.log(maptile);
                  this.#tiles.push(maptile);
             };
         };
