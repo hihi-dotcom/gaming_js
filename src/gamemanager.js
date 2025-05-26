@@ -37,6 +37,7 @@ class GameManager{
         ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
         this.#map.render(ctx);
         this.#player.render(ctx);
+
     };
     gameloop(ctx_1){
         this.update();
@@ -45,12 +46,12 @@ class GameManager{
 
     #playerUpdate(){
         
-        this.#player.getNextPosition(this.#keypressed);
-        if(this.#keypressed == undefined){
+         let kovipozi = this.#player.getNextPosition(this.#keypressed);
+        if(kovipozi == undefined){
             return;
         }
         else{
-            this.#player.settingNextPostion(this.#keypressed);
+            this.#player.settingNextPosition(kovipozi);
             this.#player.update();
         }
       

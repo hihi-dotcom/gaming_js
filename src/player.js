@@ -9,7 +9,7 @@ class Player extends Entity{
      */
     #speed;
 
-    settingNextPostion(nextposition1){
+    settingNextPosition(nextposition1){
         this.#nextPosition = nextposition1;
     };
     constructor(image_2, x, y){
@@ -23,6 +23,9 @@ class Player extends Entity{
     render(ctx){
         this.#speed = 1;
         ctx.drawImage(this.image, 0, 0, IMAGE_TILE_WIDTH, IMAGE_TILE_HEIGHT, this.rectangle.x, this.rectangle.y, this.rectangle.width, this.rectangle.height);
+        console.log("Player pozíció: " + this.rectangle.x + ", " + this.rectangle.y);
+        console.log("Player következő pozíció: " + this.#nextPosition.x + ", " + this.#nextPosition.y);
+        console.log(this.rectangle);
     };
 
     /**
