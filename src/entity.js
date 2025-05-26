@@ -17,7 +17,7 @@ class Entity{
         return this.#image;
     };
 
-    set rectangle(rectangle_1){
+    settingrectangle(rectangle_1){
         this.#rectangle = rectangle_1;
     };
 

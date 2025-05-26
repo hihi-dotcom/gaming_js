@@ -18,7 +18,7 @@ class Player extends Entity{
     };
 
     update(){
-        this.#nextPosition = Player.rectangle;
+      this.settingrectangle(this.#nextPosition);
     };
     render(ctx){
         this.#speed = 1;
@@ -30,7 +30,20 @@ class Player extends Entity{
      * @param {String} keypressed 
      * @return {Rectangle|undefined}
      */
-    getNexPosition(keypressed){
-        
+    getNextPosition(keypressed){
+        let undefinedtarolo = undefined;
+        if(keypressed == "w"){
+            return new RectAngle(this.rectangle.x, this.rectangle.y - this.#speed, this.rectangle.width, this.rectangle.height);
+        }
+        else if(keypressed == "a"){
+            return new RectAngle(this.rectangle.x - this.#speed, this.rectangle.y, this.rectangle.width, this.rectangle.height);
+        }
+        else if(keypressed == "s"){
+            return new RectAngle(this.rectangle.x, this.rectangle.y + this.#speed, this.rectangle.width, this.rectangle.height);
+        }
+        else if(keypressed == "d"){
+            return new RectAngle(this.rectangle.x + this.#speed, this.rectangle.y, this.rectangle.width, this.rectangle.height);
+        }
+        return undefinedtarolo;
     };
 };

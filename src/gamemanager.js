@@ -9,6 +9,15 @@ class GameManager{
      */
     #player;
 
+    /**
+     * @type {String}
+     */
+    #keypressed;
+
+    settingKeyPressed(keypressed1){
+        this.#keypressed = keypressed1;
+    };
+
     constructor(){
         this.#map = new GameMap(maptilesetmatrix);
 
@@ -17,7 +26,9 @@ class GameManager{
 
         this.#player = new Player(newKep, PLAYER_START_POZ_X, PLAYER_START_POZ_Y);
     };
-    update(){};
+    update(){
+        this.#playerUpdate();
+    };
     /**
      * 
      * @param {CanvasRenderingContext2D} ctx 
@@ -30,5 +41,17 @@ class GameManager{
     gameloop(ctx_1){
         this.update();
         this.render(ctx_1);
+    };
+
+    #playerUpdate(){
+        this.#player.getNextPosition(this.#keypressed);
+        if(this.#keypressed === undefined){
+            return;
+        }
+        else if(this.#keypressed !== undefined){
+            this.#player.settingNextPostion(this.#keypressed);
+            this.#player.update();
+        }
+      
     };
 };
