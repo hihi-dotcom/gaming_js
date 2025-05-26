@@ -32,18 +32,23 @@ class Player extends Entity{
      */
     getNextPosition(keypressed){
         let undefinedtarolo = undefined;
-        if(keypressed == "w"){
-            return new RectAngle(this.rectangle.x, this.rectangle.y - this.#speed, this.rectangle.width, this.rectangle.height);
+        if(keypressed !== undefined){
+            if(keypressed == "w"){
+                return new RectAngle(this.rectangle.x, this.rectangle.y - this.#speed, this.rectangle.width, this.rectangle.height);
+            }
+            else if(keypressed == "a"){
+                return new RectAngle(this.rectangle.x - this.#speed, this.rectangle.y, this.rectangle.width, this.rectangle.height);
+            }
+            else if(keypressed == "s"){
+                return new RectAngle(this.rectangle.x, this.rectangle.y + this.#speed, this.rectangle.width, this.rectangle.height);
+            }
+            else if(keypressed == "d"){
+                return new RectAngle(this.rectangle.x + this.#speed, this.rectangle.y, this.rectangle.width, this.rectangle.height);
+            }
         }
-        else if(keypressed == "a"){
-            return new RectAngle(this.rectangle.x - this.#speed, this.rectangle.y, this.rectangle.width, this.rectangle.height);
+        else{
+            return undefinedtarolo;
         }
-        else if(keypressed == "s"){
-            return new RectAngle(this.rectangle.x, this.rectangle.y + this.#speed, this.rectangle.width, this.rectangle.height);
-        }
-        else if(keypressed == "d"){
-            return new RectAngle(this.rectangle.x + this.#speed, this.rectangle.y, this.rectangle.width, this.rectangle.height);
-        }
-        return undefinedtarolo;
+        
     };
 };

@@ -44,11 +44,12 @@ class GameManager{
     };
 
     #playerUpdate(){
+        
         this.#player.getNextPosition(this.#keypressed);
-        if(this.#keypressed === undefined){
+        if(this.#keypressed == undefined){
             return;
         }
-        else if(this.#keypressed !== undefined){
+        else{
             this.#player.settingNextPostion(this.#keypressed);
             this.#player.update();
         }
