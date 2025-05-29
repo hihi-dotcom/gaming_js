@@ -51,9 +51,11 @@ class GameManager{
             return;
         }
         else{
+            this.#map.wallCollision(kovipozi);
             this.#player.settingNextPosition(kovipozi);
-            this.#player.update();
+           
         }
+         this.#player.update();
       
     };
 };
