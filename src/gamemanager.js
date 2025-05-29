@@ -46,7 +46,7 @@ class GameManager{
 
     #playerUpdate(){
         
-         let kovipozi = this.#player.getNextPosition(this.#keypressed);
+        let kovipozi = this.#player.getNextPosition(this.#keypressed);
         if(kovipozi == undefined){
             return;
         }

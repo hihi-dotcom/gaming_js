@@ -38,4 +38,20 @@ class RectAngle{
         this.#width = szeles;
         this.#height = magas;
     };
+
+    /**
+     * 
+     * @param {RectAngle} rect_2
+     * @returns {Boolean} 
+     */
+    collideWith(rect_2){
+        if(this.#x < rect_2.x + rect_2.w &&
+            this.#x + this.#width > rect_2.x &&
+            this.#y < rect_2.y + rect_2.h &&
+            this.#y + this.#height > rect_2.y
+        ){
+            return true;
+        };
+        return false;
+    };
 };

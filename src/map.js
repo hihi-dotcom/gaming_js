@@ -5,11 +5,17 @@ class GameMap{
     #tiles;
 
     /**
+     * @type {MapTile[]}
+     */
+    #walls;
+
+    /**
      * 
      * @param {number[][]} nagy_tomb 
      */
     constructor(nagy_tomb){
         this.#tiles = [];
+        this.#walls = [];
         const kep1 = new Image();
         const kep2 = new Image();
         kep1.src = "assets/wall.png";
@@ -19,6 +25,7 @@ class GameMap{
             for(let x = 0; x < nagy_tomb[y].length; x++){
                 if(nagy_tomb[y][x] == 1){
                     kep_ertek = kep1;
+                    this.#walls.push(maptile);
                 }
                 else{
                      kep_ertek = kep2;
@@ -40,6 +47,18 @@ class GameMap{
         for(const tile of this.#tiles){
             tile.render(ctx1);
         };
+    };
+
+    /**
+     * 
+     * @param {RectAngle} playerRectAngle 
+     * @returns {Boolean}
+     */
+    wallCollision(playerRectAngle){
+        for(const maptile of this.#walls){
+
+            maptile.collide(playerRectAngle);
+        }
     };
 
 };
@@ -73,4 +92,15 @@ class MapTile{
     render(ctx){
         ctx.drawImage(this.#image, this.#rectangle.x, this.#rectangle.y, this.#rectangle.width, this.#rectangle.height);
     };
+
+    /**
+     * 
+     * @param {RectAngle} playerRectAngle
+     * @returns {Boolean} 
+     */
+    collide(playerRectAngle){
+      let valasz_ertek = this.#rectangle.collideWith(playerRectAngle);
+
+      return valasz_ertek;
+    }
 };
