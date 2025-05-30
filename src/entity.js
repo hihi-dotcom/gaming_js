@@ -19,6 +19,7 @@ class Entity{
 
     settingrectangle(rectangle_1){
         this.#rectangle = rectangle_1;
+       
     };
 
     constructor(image_1, x, y){

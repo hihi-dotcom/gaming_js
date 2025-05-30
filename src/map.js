@@ -23,7 +23,7 @@ class GameMap{
        
         for(let y = 0; y < nagy_tomb.length; y++){
             for(let x = 0; x < nagy_tomb[y].length; x++){
-                const feltetel = nagy_tomb[x][y] == 1;
+                const feltetel = nagy_tomb[y][x] == 1;
                 const kep = feltetel ? kep1 : kep2;
                 const tile = new MapTile(x, y, kep)
                 if(feltetel){
@@ -37,7 +37,7 @@ class GameMap{
                 }
             };
         };
-
+       
         
        
     };
@@ -58,15 +58,16 @@ class GameMap{
      * @returns {Boolean}
      */
     wallCollision(playerRectAngle){
-        for(const maptile of this.#walls){
 
+        for(const maptile of this.#walls){
+          
            if( maptile.collide(playerRectAngle)){
+           
                 return true;
            }
-           else{
-                return false;
-           }
+
         }
+        return false;
     };
 
 };
@@ -107,6 +108,8 @@ class MapTile{
      * @returns {Boolean} 
      */
     collide(playerRectAngle){
+
+        
       let valasz_ertek = this.#rectangle.collideWith(playerRectAngle);
 
       return valasz_ertek;

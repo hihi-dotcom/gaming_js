@@ -44,11 +44,12 @@ class RectAngle{
      * @param {RectAngle} rect_2
      * @returns {Boolean} 
      */
-    collideWith(rect_2){
-        if(this.#x < rect_2.x + rect_2.w &&
-            this.#x + this.#width > rect_2.x &&
-            this.#y < rect_2.y + rect_2.h &&
-            this.#y + this.#height > rect_2.y
+    collideWith(rect2){
+
+        if(this.#x < rect2.x + rect2.width &&
+        this.#x + this.#width > rect2.x &&
+        this.#y < rect2.y + rect2.height &&
+        this.#y + this.#height > rect2.y
         ){
             return true;
         };
