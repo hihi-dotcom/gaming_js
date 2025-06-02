@@ -11,12 +11,27 @@ class Player extends Entity{
 
     #direction;
 
+    /**
+     * @type {Number}
+     */
+    #rendercounter;
+
+    /**
+     * @type {Number}
+     */
+    #renderindex;
+
+    #nextDirection;
+
     settingNextPosition(nextposition1){
         this.#nextPosition = nextposition1;
     };
     constructor(image_2, x, y){
         super(image_2, x, y);
+        this.#speed = 1;
         this.#direction = "idle";
+        this.#rendercounter = 0;
+        this.#renderindex = 0;
         
     };
 
@@ -24,9 +39,25 @@ class Player extends Entity{
       this.settingrectangle(this.#nextPosition);
     };
     render(ctx){
-        this.#speed = 1;
-        ctx.drawImage(this.image, 0, PLAYERIMAGE_STATE_TO_ROW[this.#direction] * IMAGE_TILE_HEIGHT, IMAGE_TILE_WIDTH, IMAGE_TILE_HEIGHT, this.rectangle.x, this.rectangle.y, this.rectangle.width, this.rectangle.height);
-
+        
+        if(this.#direction === this.#nextDirection){
+      
+                this.#rendercounter++;
+        }
+        else{
+            this.#rendercounter = 0;
+            this.#direction = this.#nextDirection;
+        }
+        if(this.#rendercounter > 15){
+            this.#rendercounter = 0;
+            if(this.#renderindex == 1){
+                this.#renderindex = 0;
+            }
+            else{
+                this.#renderindex = 1;
+            }
+        }
+        ctx.drawImage(this.image, this.#renderindex * IMAGE_TILE_WIDTH, PLAYERIMAGE_STATE_TO_ROW[this.#direction] * IMAGE_TILE_HEIGHT, IMAGE_TILE_WIDTH, IMAGE_TILE_HEIGHT, this.rectangle.x, this.rectangle.y, this.rectangle.width, this.rectangle.height);
     };
 
     /**
@@ -37,23 +68,23 @@ class Player extends Entity{
     getNextPosition(keypressed){
         let undefinedtarolo = undefined;
         if(keypressed == undefined){
-            this.#calculateDirection(PLAYERIMAGE_STATE_TO_ROW.idle);
+            this.#calculateDirection("idle");
         }
         if(keypressed !== undefined){
             if(keypressed == "w"){
-                this.#calculateDirection(PLAYERIMAGE_STATE_TO_ROW.up);
+                this.#calculateDirection("up");
                 return new RectAngle(this.rectangle.x, this.rectangle.y - this.#speed, this.rectangle.width, this.rectangle.height);
             }
             else if(keypressed == "a"){
-                this.#calculateDirection(PLAYERIMAGE_STATE_TO_ROW.left);
+                this.#calculateDirection("left");
                 return new RectAngle(this.rectangle.x - this.#speed, this.rectangle.y, this.rectangle.width, this.rectangle.height);
             }
             else if(keypressed == "s"){
-                this.#calculateDirection(PLAYERIMAGE_STATE_TO_ROW.down);
+                this.#calculateDirection("down");
                 return new RectAngle(this.rectangle.x, this.rectangle.y + this.#speed, this.rectangle.width, this.rectangle.height);
             }
             else if(keypressed == "d"){
-                this.#calculateDirection(PLAYERIMAGE_STATE_TO_ROW.right);
+                this.#calculateDirection("right");
                 return new RectAngle(this.rectangle.x + this.#speed, this.rectangle.y, this.rectangle.width, this.rectangle.height);
             }
         }
@@ -67,7 +98,7 @@ class Player extends Entity{
      * @param {String} newDirection 
      */
     #calculateDirection(newDirection){
-        this.#direction = newDirection;
+        this.#nextDirection = newDirection;
     };
 
    
