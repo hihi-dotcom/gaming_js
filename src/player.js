@@ -9,6 +9,8 @@ class Player extends Entity{
      */
     #speed;
 
+
+
     settingNextPosition(nextposition1){
         this.#nextPosition = nextposition1;
     };
@@ -50,6 +52,7 @@ class Player extends Entity{
         else{
             return undefinedtarolo;
         }
-        
     };
+
+   
 };
