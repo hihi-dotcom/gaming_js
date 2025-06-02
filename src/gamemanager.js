@@ -57,7 +57,7 @@ class GameManager{
             }
             else{
                 
-                this.#player.settingrectangle(this.#player.rectangle);
+                this.#player.settingNextPosition(this.#player.rectangle);
             }
 
            
